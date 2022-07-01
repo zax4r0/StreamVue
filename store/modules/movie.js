@@ -3,7 +3,7 @@ const API_KEY = process.env.TMDB_API_KEY
 const state = {
   movies: [],
   searchResults: [],
-  moviesSlider: [],
+  similerMovies: [],
   movieDetail: {},
 }
 
@@ -20,8 +20,8 @@ const getters = {
     return state.searchResults
   },
 
-  getMovieSlider(state) {
-    return state.moviesSlider
+  getSimilerMovies(state) {
+    return state.similerMovies
   },
 }
 
@@ -38,8 +38,8 @@ const mutations = {
     state.searchResults = data
   },
 
-  setMoviesSlider(state, data) {
-    state.moviesSlider = data
+  setSimilerMovies(state, data) {
+    state.similerMovies = data
   },
 }
 
@@ -71,12 +71,11 @@ const actions = {
       })
   },
 
-  async fetchMoviesSlider(context) {
-    await this.$axios
-      .$get(`https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}`)
-      .then((res) => {
-        context.commit('setMoviesSlider', res.results)
-      })
+  async fetchSimilerMovies(context, id, page) {
+    const res = await this.$axios.$get(
+      `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${API_KEY}&language=en-US&page=${(page = 1)}'`
+    )
+    context.commit('setSimilerMovies', res.results)
   },
 }
 

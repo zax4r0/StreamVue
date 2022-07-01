@@ -1,35 +1,24 @@
 <template>
-  <div>
-    <Movie :movies="movies.results" />
-    <Pagination
-      :page="movies.page"
-      :total-pages="movies.totalPages"
-      :current-page="movies.page"
-    />
+  <div class="movie_a">
+    <div
+      v-for="movie in movies"
+      :key="movie.id"
+      class="col-sm-6 col-md-4 col-lg-3"
+    >
+      <Poster :movie="movie" />
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
-import requests from '~/lib'
-import Movie from '~/components/Movie/index.vue'
-
 export default {
-  name: 'IndexPage',
-  components: { Movie },
-  async fetch({ store, query }) {
-    await store.dispatch('fetchMovies', {
-      listType: requests[query?.genre]?.url || requests.Action.url,
-      page: query.page !== undefined && query.page < 1 ? 1 : query.page,
-    })
+  name: 'MoviesResults',
+  props: {
+    /* eslint-disable-next-line vue/require-prop-types */
+    movies: {
+      default: [],
+    },
   },
-  computed: {
-    ...mapGetters({
-      movies: 'getMovies',
-    }),
-  },
-  watchQuery: ['page', 'genre'],
 }
 </script>
 

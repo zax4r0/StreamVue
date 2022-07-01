@@ -1,31 +1,38 @@
 <template>
-  <div class="iamge">
-    <nuxt-link
-      :to="
-        'movie/' +
-        movie.id +
-        '-' +
-        movie.original_title.replace(/\s+/g, '-').toLowerCase()
-      "
-    >
-      <nuxt-img
-        :src="`https://image.tmdb.org/t/p/w500/${
-          movie.poster_path ||
-          movie.backdrop_path ||
-          movie.poster_path ||
-          movie.poster_path
-        }`"
-        quality="100%"
-        width="400px"
-        height="auto"
-        :alt="`${movie.original_title}`"
-        :modifiers="{ roundCorner: '0:100' }"
-      />
-    </nuxt-link>
-    <h1 class="title">
-      {{ movie.title || movie.original_title || movie.name }}
-      {{ movie.media_type }}
-    </h1>
+  <div class="movie-item">
+    <div class="movie-item__img">
+      <nuxt-link
+        :to="
+          '/movie/' +
+          movie.id +
+          '-' +
+          movie.original_title.replace(/\s+/g, '-').toLowerCase()
+        "
+      >
+        <nuxt-img
+          :src="`https://image.tmdb.org/t/p/w500/${
+            movie.poster_path ||
+            movie.backdrop_path ||
+            movie.poster_path ||
+            movie.poster_path
+          }`"
+          quality="100%"
+          :alt="`${movie.original_title}`"
+          :modifiers="{ roundCorner: '0:100' }"
+          class="img-fluid"
+        />
+      </nuxt-link>
+    </div>
+    <div class="movie-item__content">
+      <h4 class="movie-item__title">
+        <nuxt-link :to="'/movie/' + movie.id">{{ movie.title }}</nuxt-link>
+      </h4>
+      <div class="movie-item__rate">
+        <i class="fas fa-star"></i>
+        <span>{{ movie.vote_average }}/<small>10</small></span>
+      </div>
+    </div>
+    <!-- !!! -->
   </div>
 </template>
 
@@ -42,26 +49,61 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.title {
-  margin-top: 0.25rem;
-  -webkit-transition: all 3.7s 0s ease-in;
-  -moz-transition: all 3.7s 0s ease-in;
-  -o-transition: all 3.7s 0s ease-in;
-  transition: all 3.7s 0s ease-in;
-  color: #98c379;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 28rem;
+.movie-item {
+  margin-bottom: 30px;
 }
 
-.iamge {
-  padding: 0.75rem;
-  margin-right: 0.5rem;
-  overflow: hidden;
-  object-fit: scale-down;
-  cursor: pointer;
+.movie-item__img {
+  margin-bottom: 10px;
+}
+
+.movie-item__img img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.movie-item__img a {
+  display: block;
+  position: relative;
+}
+
+.movie-item__img a:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+  -webkit-transition: ease-in-out 200ms;
+  -moz-transition: ease-in-out 200ms;
+  -ms-transition: ease-in-out 200ms;
+  -o-transition: ease-in-out 200ms;
+  transition: ease-in-out 200ms;
+  background: rgba(2, 13, 24, 0.4);
+}
+
+.movie-item__img a:hover:before {
+  opacity: 1;
+}
+
+.movie-item__title {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.movie-item__title a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.movie-item__rate .fas {
+  color: #f5b50a;
+  margin-right: 3px;
+}
+
+.movie-item__rate span {
+  color: #abb7c4;
+  font-size: 14px;
 }
 </style>

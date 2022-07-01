@@ -36,54 +36,19 @@
   min-height: 100vh;
 }
 
-.button {
-  display: inline-block;
-  text-decoration: none;
-  color: inherit;
-  padding: 8px 16px;
-  background-color: #c92502;
-  border: none;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap');
+
+.section-title {
+  margin-bottom: 30px;
+}
+
+.section-title h2 {
   color: #fff;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: 0.3s ease all;
-
-  &:hover {
-    background-color: #891b02;
-  }
+  font-size: 25px;
+  margin-bottom: 0;
+  text-transform: uppercase;
 }
 
-.button-light {
-  background-color: transparent;
-  border: 1px solid #c92502;
-
-  &:hover {
-    border-color: transparent;
-  }
-}
-
-.loading {
-  height: 100vh;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 120px;
-  align-items: flex-start;
-
-  @keyframes circle-loading {
-    to {
-      transform: rotateZ(360deg);
-    }
-  }
-
-  span {
-    display: block;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    border: 2px solid transparent;
-    border-top-color: #fff;
-    animation: circle-loading 1200ms ease infinite;
-  }
+.p-40 {
+  padding: 40px 0;
 }

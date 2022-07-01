@@ -36,26 +36,8 @@
           />
         </svg>
       </button>
+
       <!-- <div
-        class="pages"
-        v-for="(item, index) in new Array(perPage)"
-        :key="index"
-      >
-        <a
-          :class="{ active: parseInt($route.query.page) === index + 1 }"
-          class="page"
-          @click="
-            $nuxt.$router.push({
-              query: {
-                ...$route.query,
-                page: index + 1,
-              },
-            })
-          "
-          >{{ index + 1 }}</a
-        >
-      </div> -->
-      <div
         v-for="n in pages"
         :key="n"
         :class="n.content == selected ? 'active ' : '' + n.disable"
@@ -79,9 +61,9 @@
           </p>
           <p v-else>{{ n.content }}</p>
         </div>
-      </div>
+      </div> -->
 
-      <!-- <a class="page">{{ totalPages }}</a> -->
+      <a class="page">{{ currentPage }}/{{ totalPages }}</a>
       <button
         class="btn"
         @click="
@@ -147,82 +129,82 @@ export default {
       disablePrev: '',
     }
   },
-  computed: {
-    /* eslint-disable */
-    pages: function () {
-      const items = []
-      for (let i = 0; i < this.totalPages; i++) {
-        const page = {
-          content: i + 1,
-          disable: '',
-          show: false,
-        }
-        items[i] = page
-      }
-      const page1 = {
-        content: '...',
-        disable: 'disabled',
-        show: false,
-      }
-      const page2 = {
-        content: '...',
-        disable: 'disabled',
-        show: false,
-      }
-      items.splice(1, 0, page1)
-      items.splice(items.length - 1, 0, page2)
-      for (let i = 0; i < items.length; i++) {
-        if (i === 0 || i === items.length - 1) items[i].show = true
-        if (this.selected <= this.pageRange) {
-          if (this.selected === this.pageRange) {
-            if (i >= 2 && i <= this.pageRange + 1) items[i].show = true
-          } else {
-            if (i >= 2 && i <= this.pageRange) items[i].show = true
-          }
-          items[items.length - 2].show = true
-        } else if (this.selected > this.pageRange) {
-          if (
-            i >= this.selected - 1 &&
-            this.selected + 2 < items.length - 2 &&
-            i <= this.selected + 1
-          ) {
-            items[1].show = true
-            items[items.length - 2].show = true
-            items[i].show = true
-          } else if (
-            i >= items.length - 2 - this.pageRange &&
-            this.selected + 2 >= items.length - 2
-          ) {
-            items[1].show = true
-            items[items.length - 2].show = false
-            items[i].show = true
-          }
-        }
-      }
-      return items
-    },
-  },
-  methods: {
-    emitBtnClick: function (n) {
-      this.selected = n
-      this.$emit('btnClick', n, this.myData)
-      this.disablePrevNext()
-    },
-    btnNext: function () {
-      this.selected++
-      this.$emit('btnClick', this.selected, this.myData)
-      this.disablePrevNext()
-    },
-    btnPrev: function () {
-      this.selected--
-      this.$emit('btnClick', this.selected, this.myData)
-      this.disablePrevNext()
-    },
-    disablePrevNext: function () {
-      this.disablePrev = this.selected == 1 ? 'disabled' : ''
-      this.disableNext = this.selected == this.totalPage ? 'disabled' : ''
-    },
-  },
+  // computed: {
+  //   /* eslint-disable */
+  //   pages: function () {
+  //     const items = []
+  //     for (let i = 0; i < this.totalPages; i++) {
+  //       const page = {
+  //         content: i + 1,
+  //         disable: '',
+  //         show: false,
+  //       }
+  //       items[i] = page
+  //     }
+  //     const page1 = {
+  //       content: '...',
+  //       disable: 'disabled',
+  //       show: false,
+  //     }
+  //     const page2 = {
+  //       content: '...',
+  //       disable: 'disabled',
+  //       show: false,
+  //     }
+  //     items.splice(1, 0, page1)
+  //     items.splice(items.length - 1, 0, page2)
+  //     for (let i = 0; i < items.length; i++) {
+  //       if (i === 0 || i === items.length - 1) items[i].show = true
+  //       if (this.selected <= this.pageRange) {
+  //         if (this.selected === this.pageRange) {
+  //           if (i >= 2 && i <= this.pageRange + 1) items[i].show = true
+  //         } else {
+  //           if (i >= 2 && i <= this.pageRange) items[i].show = true
+  //         }
+  //         items[items.length - 2].show = true
+  //       } else if (this.selected > this.pageRange) {
+  //         if (
+  //           i >= this.selected - 1 &&
+  //           this.selected + 2 < items.length - 2 &&
+  //           i <= this.selected + 1
+  //         ) {
+  //           items[1].show = true
+  //           items[items.length - 2].show = true
+  //           items[i].show = true
+  //         } else if (
+  //           i >= items.length - 2 - this.pageRange &&
+  //           this.selected + 2 >= items.length - 2
+  //         ) {
+  //           items[1].show = true
+  //           items[items.length - 2].show = false
+  //           items[i].show = true
+  //         }
+  //       }
+  //     }
+  //     return items
+  //   },
+  // },
+  // methods: {
+  //   emitBtnClick: function (n) {
+  //     this.selected = n
+  //     this.$emit('btnClick', n, this.myData)
+  //     this.disablePrevNext()
+  //   },
+  //   btnNext: function () {
+  //     this.selected++
+  //     this.$emit('btnClick', this.selected, this.myData)
+  //     this.disablePrevNext()
+  //   },
+  //   btnPrev: function () {
+  //     this.selected--
+  //     this.$emit('btnClick', this.selected, this.myData)
+  //     this.disablePrevNext()
+  //   },
+  //   disablePrevNext: function () {
+  //     this.disablePrev = this.selected == 1 ? 'disabled' : ''
+  //     this.disableNext = this.selected == this.totalPage ? 'disabled' : ''
+  //   },
+  // },
 }
 </script>
 

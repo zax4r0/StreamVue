@@ -9,7 +9,7 @@
           $nuxt.$router
             .replace({
               path: '/',
-              query: { ...$route.query, genre: key },
+              query: { genre: key },
             })
             .catch((error) => {
               if (

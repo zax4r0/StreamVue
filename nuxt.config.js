@@ -134,4 +134,8 @@ export default {
   env: {
     TMDB_API_KEY: process.env.TMDB_API_KEY,
   },
+
+  server: {
+    host: '0.0.0.0',
+  },
 }
