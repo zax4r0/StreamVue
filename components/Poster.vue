@@ -17,6 +17,7 @@
             movie.poster_path
           }`"
           quality="100%"
+          loading="lazy"
           :alt="`${movie.original_title}`"
           :modifiers="{ roundCorner: '0:100' }"
           class="img-fluid"
