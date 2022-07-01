@@ -130,6 +130,10 @@ export default {
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {},
 
+    publicRuntimeConfig: {
+      TMDB_API_KEY: process.env.TMDB_API_KEY,
+    },
+
     env: {
       TMDB_API_KEY: process.env.TMDB_API_KEY,
     },
