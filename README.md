@@ -14,7 +14,7 @@ Movie Streeming App
 
 ## Demo
 
-Insert gif or link to demo
+[Demo](https://stream-vue.vercel.app/)
 
 ## Run Locally
 
