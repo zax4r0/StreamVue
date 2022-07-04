@@ -45,8 +45,7 @@ export default {
       {
         hid: 'twitter-img-src',
         property: 'twitter:image',
-        content:
-          'https://vue-screencasts-uploads.s3-us-west-2.amazonaws.com/thumbnails/logo.png',
+        content: 'https://avatars.githubusercontent.com/zax4r0',
       },
       {
         hid: 'twitter-title',

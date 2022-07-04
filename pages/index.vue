@@ -18,17 +18,20 @@ import Movie from '~/components/Movie/index.vue'
 export default {
   name: 'IndexPage',
   components: { Movie },
+
   async fetch({ store, query }) {
     await store.dispatch('fetchMovies', {
       listType: requests[query?.genre]?.url || requests.Action.url,
       page: query.page !== undefined && query.page < 1 ? 1 : query.page,
     })
   },
+
   computed: {
     ...mapGetters({
       movies: 'getMovies',
     }),
   },
+
   watchQuery: ['page', 'genre'],
 }
 </script>

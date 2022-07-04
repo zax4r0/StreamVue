@@ -9,19 +9,21 @@
           movie.original_title.replace(/\s+/g, '-').toLowerCase()
         "
       >
-        <nuxt-img
-          :src="`https://image.tmdb.org/t/p/w500/${
-            movie.poster_path ||
-            movie.backdrop_path ||
-            movie.poster_path ||
-            movie.poster_path
-          }`"
-          quality="100%"
-          loading="lazy"
-          :alt="`${movie.original_title}`"
-          :modifiers="{ roundCorner: '0:100' }"
-          class="img-fluid"
-        />
+        <client-only>
+          <nuxt-img
+            :src="`https://image.tmdb.org/t/p/w500/${
+              movie.poster_path ||
+              movie.backdrop_path ||
+              movie.poster_path ||
+              movie.poster_path
+            }`"
+            quality="100%"
+            loading="lazy"
+            :alt="`${movie.original_title}`"
+            :modifiers="{ roundCorner: '0:100' }"
+            class="img-fluid"
+          />
+        </client-only>
       </nuxt-link>
     </div>
     <div class="movie-item__content">
