@@ -1,61 +1,48 @@
 <template>
   <div>
     <div class="iframe-container">
-      <iframe
-        width="420"
-        height="315"
-        :src="`https://2embed.org/embed/movie?tmdb=${detail.id}`"
-        frameborder="0"
-        picture-in-picture
-        accelerometer
-        encrypted-media
-        gyroscope
-        allowfullscreen
-      ></iframe>
+      <client-only>
+        <iframe
+          width="420"
+          height="315"
+          :src="`https://2embed.org/embed/movie?tmdb=${detail.id}`"
+          frameborder="0"
+          picture-in-picture
+          accelerometer
+          encrypted-media
+          gyroscope
+          allowfullscreen
+        ></iframe>
+      </client-only>
     </div>
 
     <div id="fullpage">
       <div class="section one">
         <div class="movie-info">
           <h1>{{ detail.original_title }}</h1>
-          <p>
-            <span class="rating">{{
-              detail.adult === true ? '18+' : 'PG-13'
-            }}</span>
-            {{ Math.floor(detail.runtime / 60) }}hr {{ '' }}
-            {{ Math.floor(detail.runtime % 60) }}min -
-            {{ detail.genres[0].name || '' }}/
-            {{ detail.genres[1].name || '' }}/
-            {{ detail.genres[2].name || '' }}
-          </p>
+          <div>
+            <span class="rating">{{ detail.adult === true ? '18+' : 'PG-13' }}</span>
+            <a>
+              {{ Math.floor(detail.runtime / 60) }}hr {{ '' }} {{ Math.floor(detail.runtime % 60) }}min
+              <div v-for="g in detail.genres" :key="g.id">{{ g.name }}</div>
+            </a>
+          </div>
           <div class="stars">
-            <i
-              v-for="vote in new Array(detail.vote_count)"
-              :key="vote"
-              class="fa fa-star"
-            ></i>
+            <i v-for="vote in new Array(detail.vote_count)" :key="vote" class="fa fa-star"></i>
           </div>
           <!--stars end-->
           <p>
             {{ detail.overview }}
           </p>
-          <button id="play-btn">
-            <i class="fa fa-play-circle"></i> WATCH NOW
-          </button>
+          <button id="play-btn"><i class="fa fa-play-circle"></i> WATCH NOW</button>
           <button id="add-btn">ADD TO QUEUE</button>
         </div>
         <!--movie-info end-->
       </div>
     </div>
     <div>
-      <h1>Similer Movies</h1>
-
       <Movie :movies="similer" />
-      <Pagination
-        :page="similer.page"
-        :total-pages="similer.totalPages"
-        :current-page="similer.page"
-      />
+      <Pagination :page="similer.page" :total-pages="similer.totalPages" :current-page="similer.page" />
     </div>
   </div>
 </template>
@@ -70,11 +57,7 @@ export default {
 
   async fetch({ store, params, query }) {
     await store.dispatch('fetchMovieDetail', params.id.split('-')[0])
-    await store.dispatch(
-      'fetchSimilerMovies',
-      params.id.split('-')[0],
-      query.page
-    )
+    await store.dispatch('fetchSimilerMovies', params.id.split('-')[0], query.page)
   },
   head() {
     return {
@@ -83,19 +66,13 @@ export default {
         {
           hid: 'description',
           name: 'description',
-          content:
-            this.detail?.overview.length >= 120
-              ? this.detail?.overview.substring(0, 120) + '...'
-              : this.detail?.overview,
+          content: this.detail?.overview.length >= 120 ? this.detail?.overview.substring(0, 120) + '...' : this.detail?.overview,
         },
         { hid: 'og:type', content: 'article' },
         { hid: 'og:title', content: this.detail?.title },
         {
           property: 'og:description',
-          content:
-            this.detail.overview.length >= 120
-              ? this.detail.overview.substring(0, 120) + '...'
-              : this.detail.overview,
+          content: this.detail.overview.length >= 120 ? this.detail.overview.substring(0, 120) + '...' : this.detail.overview,
         },
         {
           property: 'og:image',
@@ -117,7 +94,6 @@ export default {
   position: relative;
   margin-top: 2.5rem;
   margin-top: 2.5rem;
-  width: 10em;
   display: inline-block;
   background: rgb(0, 0, 0);
   width: 100%;
@@ -142,6 +118,7 @@ $white: white;
 $black: rgb(0, 0, 0);
 $lightgray: lightgray;
 $skyblue: lightskyblue;
+
 .movie-info {
   color: $white;
   text-shadow: 0 0 30px black;

@@ -33,14 +33,7 @@
 
 <script>
 // Only import what you need!
-import {
-  HomeIcon,
-  LightningBoltIcon,
-  BadgeCheckIcon,
-  CollectionIcon,
-  SearchIcon,
-  UserIcon,
-} from '@vue-hero-icons/outline'
+import { HomeIcon, LightningBoltIcon, BadgeCheckIcon, CollectionIcon, SearchIcon, UserIcon } from '@vue-hero-icons/outline'
 export default {
   name: 'AppHeader',
   components: {

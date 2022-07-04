@@ -12,12 +12,7 @@
               query: { genre: key },
             })
             .catch((error) => {
-              if (
-                error.name !== 'NavigationDuplicated' &&
-                !error.message.includes(
-                  'Avoided redundant navigation to current location'
-                )
-              ) {
+              if (error.name !== 'NavigationDuplicated' && !error.message.includes('Avoided redundant navigation to current location')) {
                 console.log(error)
               }
             })

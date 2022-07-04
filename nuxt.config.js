@@ -137,4 +137,9 @@ export default {
   server: {
     host: '0.0.0.0',
   },
+
+  loading: {
+    color: 'green',
+    height: '5px',
+  },
 }

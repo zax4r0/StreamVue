@@ -1,11 +1,7 @@
 <template>
   <div>
     <Movie :movies="movies.results" />
-    <Pagination
-      :page="movies.page"
-      :total-pages="movies.totalPages"
-      :current-page="movies.page"
-    />
+    <Pagination :page="movies.page" :total-pages="movies.totalPages" :current-page="movies.page" />
   </div>
 </template>
 
@@ -19,11 +15,18 @@ export default {
   name: 'IndexPage',
   components: { Movie },
 
-  async fetch({ store, query }) {
-    await store.dispatch('fetchMovies', {
-      listType: requests[query?.genre]?.url || requests.Action.url,
-      page: query.page !== undefined && query.page < 1 ? 1 : query.page,
-    })
+  async fetch({ store, error, query }) {
+    try {
+      await store.dispatch('fetchMovies', {
+        listType: requests[query?.genre]?.url || requests.Action.url,
+        page: query.page !== undefined && query.page < 1 ? 1 : query.page,
+      })
+    } catch (e) {
+      error({
+        statusCode: 503,
+        message: 'Unable to fetch',
+      })
+    }
   },
 
   computed: {

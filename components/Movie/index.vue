@@ -1,11 +1,9 @@
 <template>
-  <div class="movie_a">
-    <div
-      v-for="movie in movies"
-      :key="movie.id"
-      class="col-sm-6 col-md-4 col-lg-3"
-    >
-      <Poster :movie="movie" />
+  <div>
+    <div class="movie_a">
+      <div v-for="movie in movies" :key="movie.id" class="col-sm-6 col-md-4 col-lg-3">
+        <Poster :movie="movie" />
+      </div>
     </div>
   </div>
 </template>
@@ -14,8 +12,8 @@
 export default {
   name: 'MoviesResults',
   props: {
-    /* eslint-disable-next-line vue/require-prop-types */
     movies: {
+      /* eslint-disable-next-line vue/require-prop-types */
       default: [],
     },
   },
