@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="iframe-container">
-      <client-only>
+      
         <iframe
           width="420"
           height="315"
@@ -13,7 +13,7 @@
           gyroscope
           allowfullscreen
         ></iframe>
-      </client-only>
+      
     </div>
 
     <div id="fullpage">
